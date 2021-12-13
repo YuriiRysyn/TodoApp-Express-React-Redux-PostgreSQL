@@ -11,8 +11,8 @@ app.get('/api', (req, res) => {
   res.send(JSON.stringify({ x: 1, y: 4 }));
 });
 
-// app.use(express.static('build'));
-app.use(express.static(path.join(__dirname, 'build')));
+app.use(express.static('build'));
+// app.use(express.static(path.join(__dirname, 'build')));
 // app.use(express.static('public'));
 
 app.listen(port, () => {
