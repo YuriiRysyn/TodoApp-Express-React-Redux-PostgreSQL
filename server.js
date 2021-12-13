@@ -1,5 +1,5 @@
 const express = require('express');
-const { path } = require('express/lib/application');
+const path = require('path')
 const app = express();
 const port = process.env.PORT || 5000;
 
@@ -13,8 +13,8 @@ app.get('/api', (req, res) => {
 
 // app.use(express.static('build'));
 // app.use('/static', express.static(__dirname + '/public'));
-app.use('/static', express.static(path.join(__dirname, 'public')))
-// app.use(express.static(path.join(__dirname, 'build')));
+// app.use('/static', express.static(path.join(__dirname, '/public')))
+app.use(express.static(path.join(__dirname, 'build')));
 // app.use(express.static('public'));
 
 app.listen(port, () => {
