@@ -12,7 +12,7 @@ function App() {
 
   const [data, setData] = useState(null);
 
-  const API_URL = 'http://localhost:5000/api';
+  const API_URL = '/api';
 
   useEffect(() => {
     (async function () {
