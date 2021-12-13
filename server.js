@@ -1,7 +1,6 @@
 const express = require('express');
 const app = express();
-const port = 5000;
-
+const port = process.env.PORT || 5000;
 
 app.get('/api', (req, res) => {
   res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
