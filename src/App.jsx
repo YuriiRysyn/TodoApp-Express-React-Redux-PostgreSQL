@@ -42,11 +42,11 @@ function App() {
       </div>
       <div className="row">
         <div className="col">
-          <h2>Синхронні пости</h2>
+          <h2>Synchronous posts</h2>
           <Posts />
         </div>
         <div className="col">
-          <h2>Асинхронні пости</h2>
+          <h2>Asynchronous posts</h2>
 
           <FetchedPosts />
         </div>

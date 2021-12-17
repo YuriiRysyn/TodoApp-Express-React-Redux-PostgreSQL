@@ -8,7 +8,7 @@ app.get('/api', (req, res) => {
   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
   res.header('Access-Control-Allow-Headers', 'Content-Type');
 
-  res.send(JSON.stringify({ x: 1, y: 4 }));
+  res.send(JSON.stringify({ x: 12, y: 4 }));
 });
 
 app.use(express.static('build'));
