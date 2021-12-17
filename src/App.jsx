@@ -16,7 +16,7 @@ function App() {
 
   useEffect(() => {
     (async function () {
-      const res = await fetch(API_URL);
+      const res = await fetch(process.env.REACT_APP_API_URL);
       const data = await res.json();
 
       console.log(data);
