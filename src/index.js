@@ -1,11 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import { compose, createStore, applyMiddleware } from 'redux';
+
+import { compose, applyMiddleware, createStore } from 'redux';
+
 import thunk from 'redux-thunk';
 
-import App from './App.jsx';
-import { rootReducer } from './redux/rootReducer.js';
+import { Provider } from 'react-redux';
+
+import { rootReducer } from './redux/reducer';
+
+import './styles/index.css';
+import './styles/todo-list.css';
+import './styles/filters.css';
+
+import App from './components/App';
 
 const store = createStore(
   rootReducer,
