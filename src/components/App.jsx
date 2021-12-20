@@ -36,19 +36,19 @@ const App = () => {
 
   const filteredTodos = filterTodosByCompleteStatus();
 
-  // useEffect(() => {
-  //   try {
-  //     (async function () {
-  //       const res = await fetch(process.env.REACT_APP_API_URL);
-  //       const data = await res.json();
+  useEffect(() => {
+    try {
+      (async function () {
+        const res = await fetch(process.env.REACT_APP_API_URL);
+        const data = await res.json();
 
-  //       console.log(data);
-  //       setData(data);
-  //     })();
-  //   } catch(e) {
-  //     console.log(e);
-  //   }
-  // }, []);
+        console.log(data);
+        // setData(data);
+      })();
+    } catch(e) {
+      console.log(e);
+    }
+  }, []);
 
   useEffect(() => {
     dispatch(actions.getTodosFromLS());
