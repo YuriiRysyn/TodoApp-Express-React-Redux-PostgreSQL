@@ -16,8 +16,6 @@ const TodosFilter = () => {
 
   const { getState, subscribe } = useStore();
 
-  console.log(getState());
-
   return (
     <ul className="filters">
       <li>

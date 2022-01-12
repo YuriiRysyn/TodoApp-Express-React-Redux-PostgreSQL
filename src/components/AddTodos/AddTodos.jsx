@@ -17,14 +17,14 @@ const AddTodos = () => {
 
     if (newTodoTitle.trim() === '') {
       return;
-    }
+    } 
 
-    const id = todos.length === 0 ? 1
-      : todos.reduce((accum, currentTodo) => (
-        accum > currentTodo.id ? accum : currentTodo.id),
-      0) + 1;
+    // const id = todos.length === 0 ? 1
+    //   : todos.reduce((accum, currentTodo) => (
+    //     accum > currentTodo.id ? accum : currentTodo.id),
+    //   0) + 1;
 
-    dispatch(addTodo(newTodoTitle, id));
+    dispatch(addTodo(newTodoTitle));
 
     setNewTodoTitle('');
   };

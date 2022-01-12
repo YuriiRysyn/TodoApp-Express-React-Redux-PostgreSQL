@@ -9,13 +9,12 @@ import {
   MARK_ALL_TODOS,
   CLEAR_COMPLETED_TODOS,
   GET_TODOS_FROM_LS,
+  GET_TODOS_FROM_SERVER,
 } from './constants';
 
-export const getTodosFromLS = () => (dispatch) => {
-  let todos;
-
+export const getTodosFromLS = () => dispatch => {
   if (JSON.parse(localStorage.getItem('todos'))) {
-    todos = (JSON.parse(localStorage.getItem('todos')));
+    const todos = JSON.parse(localStorage.getItem('todos'));
 
     dispatch({
       type: GET_TODOS_FROM_LS,
@@ -24,24 +23,66 @@ export const getTodosFromLS = () => (dispatch) => {
   }
 };
 
-export const addTodo = (title, id) => ({
-  type: ADD_TODO,
-  id,
-  title,
-});
+export const getTodosFromServer = () => dispatch => {
+  try {
+    (async function () {
+      const url = process.env.REACT_APP_API_URL + '/todos';
+      const res = await fetch(url);
+      const todos = await res.json();
+      dispatch({
+        type: GET_TODOS_FROM_SERVER,
+        todos,
+      });
+    })();
+  } catch (e) {
+    console.log(e);
+  }
+};
 
-// export const addTodo = (title, id) => dispatch => (
-//   setTimeout(() => dispatch({
-//     type: ADD_TODO,
-//     id,
-//     title,
-//   }), 500)
-// );
+// export const addTodo = (title, id) => ({
+//   type: ADD_TODO,
+//   id,
+//   title,
+// });
 
-export const deleteTodo = id => ({
-  type: DELETE_TODO,
-  id,
-});
+export const addTodo = title => dispatch => {
+  try {
+    (async function () {
+      const url = process.env.REACT_APP_API_URL + '/todos';
+      const res = await fetch(url, {
+        method: 'post',
+        headers: {
+          'Content-Type': 'application/json; charset=utf-8',
+        },
+        body: JSON.stringify({ title }),
+      });
+
+      dispatch(getTodosFromServer());
+    })();
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+// export const deleteTodo = id => ({
+//   type: DELETE_TODO,
+//   id,
+// });
+
+export const deleteTodo =  todoId => dispatch => {
+  try {
+    (async function () {
+      const url = `${process.env.REACT_APP_API_URL}/todos/${todoId}`;
+      const res = await fetch(url, {
+        method: 'delete',
+      });
+
+      dispatch(getTodosFromServer());
+    })();
+  } catch (e) {
+    console.log(e);
+  }
+};
 
 export const toggleTodo = (id, todos) => ({
   type: TOGGLE_TODO,

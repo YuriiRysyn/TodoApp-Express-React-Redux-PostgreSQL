@@ -153,7 +153,12 @@ body {
   border-top: 1px solid #e6e6e6;
 }
 
-.footer:before {
+*, ::after, ::before {
+  box-sizing: content-box;
+}
+
+.footer::before {
+  box-sizing: content-box;
   content: "";
   position: absolute;
   right: 0;

@@ -10,27 +10,34 @@ import {
   MARK_ALL_TODOS,
   CLEAR_COMPLETED_TODOS,
   GET_TODOS_FROM_LS,
+  GET_TODOS_FROM_SERVER,
 } from './constants';
 
 const todosReducer = (state = [], action) => {
   switch (action.type) {
     case GET_TODOS_FROM_LS:
-      return ([...action.todos]);
+      return [...action.todos];
 
-    case ADD_TODO:
-      return [...state, {
-        title: action.title,
-        id: action.id,
-        completed: false,
-      }];
+    case GET_TODOS_FROM_SERVER:
+      return [...action.todos];
+
+    // case ADD_TODO:
+    //   return [
+    //     ...state,
+    //     {
+    //       title: action.title,
+    //       id: action.id,
+    //       completed: false,
+    //     },
+    //   ];
 
     case TOGGLE_TODO:
-      return [...state].map((todo) => {
+      return [...state].map(todo => {
         if (todo.id === action.id) {
-          return ({
+          return {
             ...todo,
             completed: !todo.completed,
-          });
+          };
         }
 
         return todo;
@@ -40,7 +47,7 @@ const todosReducer = (state = [], action) => {
       return [...state].filter(todo => todo.id !== action.id);
 
     case CHANGE_TODO:
-      return [...state].map((todo) => {
+      return [...state].map(todo => {
         if (todo.id === action.id) {
           return {
             ...todo,

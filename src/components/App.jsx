@@ -1,9 +1,9 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { connect, useSelector, shallowEqual, useDispatch } from 'react-redux';
 import PropTypes, { shape } from 'prop-types';
-
+ 
 import { TodoList } from './TodoList/TodoList';
-import AddTodos from './AddTodos/AddTodos';
+import AddTodos from './AddTodos/AddTodos'; 
 import TodosFilter from './TodosFilter/TodosFilter';
 
 import { SHOW_ACTIVE, SHOW_ALL, SHOW_COMPLETED } from '../redux/constants';
@@ -35,32 +35,23 @@ const App = () => {
   };
 
   const filteredTodos = filterTodosByCompleteStatus();
+ 
 
   useEffect(() => {
-    try {
-      (async function () {
-        const res = await fetch(process.env.REACT_APP_API_URL);
-        const data = await res.json();
+    // dispatch(actions.getTodosFromLS());
+    dispatch(actions.getTodosFromServer());
 
-        console.log(data);
-        // setData(data);
-      })();
-    } catch(e) {
-      console.log(e);
-    }
   }, []);
 
   useEffect(() => {
-    dispatch(actions.getTodosFromLS());
-  }, []);
+    // dispatch(actions.getTodosFromServer());
 
-  useEffect(() => {
     setUnCompletedTodos(() => todos.filter(todo => !todo.completed));
     setCompletedTodos(() => todos.filter(todo => todo.completed));
 
     setIsAllToodosCompleted(() => todos.every(item => item.completed === true));
 
-    localStorage.setItem('todos', JSON.stringify(todos));
+    // localStorage.setItem('todos', JSON.stringify(todos));
   }, [todos]);
 
   return (
