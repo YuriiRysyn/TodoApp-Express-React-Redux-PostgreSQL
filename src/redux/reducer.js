@@ -31,6 +31,10 @@ const todosReducer = (state = [], action) => {
     //     },
     //   ];
 
+    case ADD_TODO:
+      console.log(action);
+      return [...state, action.newTodo];
+
     case TOGGLE_TODO:
       return [...state].map(todo => {
         if (todo.id === action.id) {

@@ -5,11 +5,7 @@ import { connect, useSelector, useDispatch } from 'react-redux';
 import { addTodo } from '../../redux/actions';
 
 const AddTodos = () => {
-  const todos = useSelector(state => state.todos);
   const dispatch = useDispatch();
-
-  // const todos = useSelector(state => state.todos);
-
   const [newTodoTitle, setNewTodoTitle] = useState('');
 
   const addNewTodo = (event) => {
@@ -18,12 +14,7 @@ const AddTodos = () => {
     if (newTodoTitle.trim() === '') {
       return;
     } 
-
-    // const id = todos.length === 0 ? 1
-    //   : todos.reduce((accum, currentTodo) => (
-    //     accum > currentTodo.id ? accum : currentTodo.id),
-    //   0) + 1;
-
+    
     dispatch(addTodo(newTodoTitle));
 
     setNewTodoTitle('');

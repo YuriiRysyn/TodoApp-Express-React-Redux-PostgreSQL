@@ -1,11 +1,11 @@
-import React, { useContext, useState } from "react";
-import PropTypes, { shape } from "prop-types";
+import React, { useContext, useState } from 'react';
+import PropTypes, { shape } from 'prop-types';
 
-import classNames from "classnames/bind";
-import { connect, useDispatch, useSelector } from "react-redux";
-import { changeTodo, toggleTodo, deleteTodo } from "../../redux/actions";
+import classNames from 'classnames/bind';
+import { connect, useDispatch, useSelector } from 'react-redux';
+import { changeTodo, toggleTodo, deleteTodo } from '../../redux/actions';
 
-import CheckoutDrawerContext from "../context";
+import CheckoutDrawerContext from '../context';
 
 const TodoItem = ({
   // todos,
@@ -14,7 +14,7 @@ const TodoItem = ({
   // toggleTodo,
   // deleteTodo,
 }) => {
-  const todos = useSelector((state) => state.todos);
+  const todos = useSelector(state => state.todos);
   const dispatch = useDispatch();
 
   const [editTodo, setEditTodo] = useState(false);
@@ -22,8 +22,8 @@ const TodoItem = ({
 
   const value = useContext(CheckoutDrawerContext);
 
-  const handleEditing = (event) => {
-    if (event.key === "Enter") {
+  const handleEditing = event => {
+    if (event.key === 'Enter') {
       if (todoTitle) {
         dispatch(changeTodo(todo.id, todoTitle.trim()));
       } else {
@@ -33,13 +33,13 @@ const TodoItem = ({
       setEditTodo(false);
     }
 
-    if (event.key === "Escape") {
+    if (event.key === 'Escape') {
       setTodoTitle(todo.title);
       setEditTodo(false);
     }
   };
 
-  const removefocus = (event) => {
+  const removefocus = event => {
     if (todoTitle) {
       dispatch(changeTodo(todo.id, todoTitle.trim()));
     } else {
@@ -63,7 +63,7 @@ const TodoItem = ({
             type="checkbox"
             className="toggle"
             checked={todo.completed}
-            onChange={() => dispatch(toggleTodo(todo.id, todos))}
+            onChange={() => dispatch(toggleTodo(todo.id))}
           />
           <label>{todo.title}</label>
           <button
