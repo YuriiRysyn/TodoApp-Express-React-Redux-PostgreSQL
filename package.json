@@ -1,5 +1,5 @@
 {
-  "name": "react-redux-saga",
+  "name": "todo-app-node-express-react-redux-postgresql",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
