@@ -1,6 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const path = require('path');
+
 const {
   addTodo,
   getTodos,
@@ -19,43 +19,41 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get('/api/todos', (req, res) => {
-  res.send(getTodos());
+app.get('/api/todos', async (req, res) => {
+  res.send( await getTodos());
 });
 
-app.post('/api/todos', bodyParser.json(), (req, res) => {
+app.post('/api/todos', bodyParser.json(), async (req, res) => {
   const newTodo = req.body;
-  addTodo(newTodo);
-  const todos = getTodos();
+
+  console.log(newTodo);
+  
+  await addTodo(newTodo);
+  const todos = await getTodos();
   res.send(todos[todos.length - 1]);
 });
 
-
-app.delete('/api/todos/:todoId', (req, res) => {
-  deleteTodo(req.params.todoId);
+app.delete('/api/todos/:todoId', async (req, res) => {
+  await deleteTodo(req.params.todoId);
 
   res.json({ status: 'success' });
 });
 
-
-
-app.patch('/api/todos/update/:todoId', bodyParser.json(), (req, res) => {
-  updateTodo(req.params.todoId, req.body);
+app.patch('/api/todos/update/:todoId', bodyParser.json(), async (req, res) => {
+  await updateTodo(req.params.todoId, req.body);
 
   res.json({ status: 'success' });
 });
 
 app.patch('/api/todos/mark-all-todos', bodyParser.json(), (req, res) => {
-  console.log(req.body);
+  // console.log(req.body);
   markAllTodos(req.body.isAllToodosCompleted);
 
   res.json({ status: 'success' });
 });
 
-
-app.delete('/api/delete-completed-todos', (req, res) => {
-  console.log('delete');
-  clearCompletedTodos();
+app.delete('/api/delete-completed-todos', async (req, res) => {
+  await clearCompletedTodos();
 
   res.json({ status: 'success' });
 });
@@ -65,4 +63,3 @@ app.use(express.static('build'));
 app.listen(port, () => {
   console.log(`Todo app listening at http://localhost:${port}`);
 });
- 
