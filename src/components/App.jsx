@@ -1,14 +1,15 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { connect, useSelector, shallowEqual, useDispatch } from 'react-redux';
 import PropTypes, { shape } from 'prop-types';
- 
+
 import { TodoList } from './TodoList/TodoList';
-import AddTodos from './AddTodos/AddTodos'; 
+import AddTodos from './AddTodos/AddTodos';
 import TodosFilter from './TodosFilter/TodosFilter';
 
 import { SHOW_ACTIVE, SHOW_ALL, SHOW_COMPLETED } from '../redux/constants';
 
 import * as actions from '../redux/actions';
+import * as userActions from '../redux/actions/userActions';
 
 import CheckoutDrawerContext from './context';
 
@@ -16,9 +17,11 @@ const App = () => {
   const [unCompletedTodos, setUnCompletedTodos] = useState('');
   const [completedTodos, setCompletedTodos] = useState('');
   const [isAllToodosCompleted, setIsAllToodosCompleted] = useState(false);
+  const [isPending, setIsPending] = useState(true);
 
   const dispatch = useDispatch();
 
+  const user = useSelector(state => state.user);
   const todos = useSelector(state => state.todos);
   const todosFilter = useSelector(state => state.filter);
 
@@ -35,12 +38,19 @@ const App = () => {
   };
 
   const filteredTodos = filterTodosByCompleteStatus();
- 
 
   useEffect(() => {
     // dispatch(actions.getTodosFromLS());
-    dispatch(actions.getTodosFromServer());
+    dispatch(userActions.getUser());
+    setIsPending(false);
+  }, []);
 
+  useEffect(() => {
+    // dispatch(actions.getTodosFromLS());
+    setIsPending(true);
+
+    dispatch(actions.getTodosFromServer());
+    setIsPending(false);
   }, []);
 
   useEffect(() => {

@@ -11,6 +11,7 @@ import {
   CLEAR_COMPLETED_TODOS,
   GET_TODOS_FROM_LS,
   GET_TODOS_FROM_SERVER,
+  GET_USER_FROM_LS,
 } from './constants';
 
 const todosReducer = (state = [], action) => {
@@ -98,7 +99,18 @@ const filterForTodos = (state = SHOW_ALL, action) => {
   }
 };
 
+const userReducer = (state = null, action) => {
+  switch (action.type) {
+    case GET_USER_FROM_LS:
+      return action.user;
+
+    default:
+      return state;
+  }
+};
+
 export const rootReducer = combineReducers({
   todos: todosReducer,
   filter: filterForTodos,
+  user: userReducer,
 });

@@ -24,7 +24,10 @@ const config = {
   },
 };
 const client = new Client(config);
-client.connect();
+
+if (process.env.IS_ACTIVE_DB) {
+  client.connect().catch(e => console.log(e));
+}
 
 const getAllTodosFromDB = async () => {
   try {
@@ -85,7 +88,6 @@ const updateTodoInDB = async (todoId, data) => {
         `UPDATE todos SET completed=${!currentTodo.completed} WHERE id='${todoId}';`
       );
     }
-
   } catch (e) {
     console.log(e);
   }
@@ -93,9 +95,7 @@ const updateTodoInDB = async (todoId, data) => {
 
 const markAllTodosInDB = async isAllToodosCompleted => {
   try {
-    await client.query(
-      `UPDATE todos SET completed=${!isAllToodosCompleted};`
-    );
+    await client.query(`UPDATE todos SET completed=${!isAllToodosCompleted};`);
   } catch (e) {
     console.log(e);
   }

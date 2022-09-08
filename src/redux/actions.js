@@ -147,7 +147,7 @@ export const markAllTodosLocal = isAllToodosCompleted => ({
   isAllToodosCompleted,
 });
 
-export const markAllTodos = isAllToodosCompleted =>  dispatch => {
+export const markAllTodos = isAllToodosCompleted => dispatch => {
   try {
     (async function () {
       const url = `${process.env.REACT_APP_API_URL}/todos/mark-all-todos/`;
@@ -173,7 +173,7 @@ export const clearCompletedTodosLocal = () => ({
   type: CLEAR_COMPLETED_TODOS,
 });
 
-export const clearCompletedTodos = () =>  dispatch => {
+export const clearCompletedTodos = () => dispatch => {
   try {
     (async function () {
       const url = `${process.env.REACT_APP_API_URL}/delete-completed-todos/`;
