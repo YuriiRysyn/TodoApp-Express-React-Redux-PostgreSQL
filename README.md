@@ -12,4 +12,4 @@ Front-end:
 - NodeJs/Express
 - Heroku service
 - PostrgeSQL
-- Aiven service for DB
+- Aiven service for DB 
